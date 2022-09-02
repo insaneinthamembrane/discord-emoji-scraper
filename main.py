@@ -15,11 +15,11 @@ if not emojis.exists():
     emojis.mkdir()
 
 
-def cprint(color, content):
+def cprint(color, content) -> None:
     console.print(f"[ [bold {color}]>[/] ] {content}")
 
 
-def save(server_id: str, emoji_name: str, content: bytes):
+def save(server_id: str, emoji_name: str, content: bytes) -> None:
     path = pathlib.Path(emojis, server_id, emoji_name)
     if path.exists():
         return
@@ -28,7 +28,7 @@ def save(server_id: str, emoji_name: str, content: bytes):
     path.write_bytes(content)
 
 
-async def download_guild_emojis(server_id: str):
+async def download_guild_emojis(server_id: str) -> None:
     path = pathlib.Path(emojis, server_id)
     if not path.exists():
         path.mkdir()
@@ -47,7 +47,7 @@ async def download_guild_emojis(server_id: str):
         cprint("green", f"Successfully saved {name} from {server_id}")
 
 
-async def main():
+async def main() -> None:
     req = await client.get("https://discord.com/api/v9/users/@me/guilds")
     res = req.json()
 
